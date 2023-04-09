@@ -1,7 +1,11 @@
 import pyglet
 import math
+from pyglet.window import mouse
+
+
 
 window = pyglet.window.Window()
+window.set_caption("Fractals")
 width, height = window.size
 
 @window.event
@@ -22,11 +26,24 @@ def draw_fractal(x, y, length, const_angle, angle=0):
     draw_fractal(prev_x + x, prev_y + y, length, const_angle, angle + const_angle)
     draw_fractal(prev_x + x, prev_y + y, length, const_angle, angle - const_angle)
 
-angle = int(input("Type angle in deg: "))
-angle = math.pi/(180/angle)
+
+slide = pyglet.shapes.Rectangle(x = 10, y = 10, width = width-20, height = 10, color=(50, 50, 50))
+knob = pyglet.shapes.Circle(x = 10, y = 15, radius = 7, color = (155, 155, 155))
+
+@window.event
+def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+    if buttons & mouse.LEFT:
+        if x >= slide.x and x <= slide.x + slide.width and y >= 0 and y <= 2*slide.y + slide.height:
+            knob.x = x
+
+
+
 @window.event
 def on_draw():
     window.clear()
-    draw_fractal(width/2, 0, 400, angle, 0)
+    slide.draw()
+    knob.draw()
+    angle = round((knob.x-slide.x) / (slide.width), 2) * math.pi
+    draw_fractal(width/2, 2*slide.y+slide.height, 400, angle, 0)
 
 pyglet.app.run()
