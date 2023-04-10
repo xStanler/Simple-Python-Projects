@@ -99,20 +99,24 @@ def bezier_cubic(A, B, C, D, t):
 
     points = []
 
+    t = t/2
+
     i = t
     while i < 1:
-        x1 = (1-i)*((1-i)*xA + i*xC) + i*((1-i)*xC + i*xB)
+        x1 = (1-i)*((1-i)*xA + i*xC) + i*((1-i)*xC + i*xD)
         x2 = (1-i)*((1-i)*xC + i*xD) + i*((1-i)*xD + i*xB)
 
-        y1 = (1-i)*((1-i)*yA + i*yC) + i*((1-i)*yC + i*yB)
+        y1 = (1-i)*((1-i)*yA + i*yC) + i*((1-i)*yC + i*yD)
         y2 = (1-i)*((1-i)*yC + i*yD) + i*((1-i)*yD + i*yB)
 
-        x = ((1-t)*x1) + (t*x2)
-        y = ((1-t)*y1) + (t*y2)
+        x = ((1-i)*x1) + (i*x2)
+        y = ((1-i)*y1) + (i*y2)
 
         points.insert(0, (x, y))
+        i+=t
 
     show_lines(points, A, B)
+    # show_points(points)
     pointA.draw()
     pointB.draw()
     pointC.draw()
