@@ -14,22 +14,22 @@ Cubic Bezier
 
 ---
 
-### File Organizer
+### 2. File Organizer
 This program clean up your desktop by moving files to 4 diffrent folder groups.
 
 ---
 
-### Fractals
+### 3. Fractals
 Program that draws fractal tree.![fractals](https://user-images.githubusercontent.com/64655758/230911196-0d4556c5-0f71-4bf0-9494-2a72544f78e3.png)
 
 ---
 
-### Image2Ascii
+### 4. Image2Ascii
 This program takes photos in '.jpg' and saves them as ascii image in '.txt' file.
 
 ---
 
-### QR Code Generator
+### 5. QR Code Generator
 
 Generates qrcodes with your custom text saved in.
 
