@@ -2,11 +2,26 @@ import pyglet
 from pyglet.window import mouse
 
 window = pyglet.window.Window()
+window.set_caption("Bezier")
 width, height = window.size
 
 pointA = pyglet.shapes.Circle(20, height//2, 6, color=(227, 84, 84))
 pointB = pyglet.shapes.Circle(width-20, height//2, 6, color=(227, 84, 84))
 pointC = pyglet.shapes.Circle(200, height//2+200, 6, color=(227, 84, 84))
+pointD = pyglet.shapes.Circle(width-200, height//2-200, 6, color=(227, 84, 84))
+
+label = pyglet.text.Label('Enter mode (key): \n1. Linear Bezier \n2. Quadratic Bezier \n3. Static Bezier', font_name="Consolas", font_size=14, x=10, y =height - 20, width=200, multiline=True)
+
+@window.event
+def on_key_press(symbol, modifiers):
+    global mode
+    if symbol == ord('1'):
+        mode = 1
+    elif symbol == ord('2'):
+        mode = 2
+    elif symbol == ord('3'):
+        mode = 3
+mode = 1
 
 @window.event
 def on_mouse_motion(x, y, dx, dy):
@@ -34,8 +49,7 @@ def show_points(points):
         im.draw()
 
 
-def bezier_linear(A, B):
-    t = 0.05
+def bezier_linear(A, B, t):
     xA, yA = A
     xB, yB = B
 
@@ -50,13 +64,11 @@ def bezier_linear(A, B):
 
     #displaying
     show_lines(points, A, B)
-    show_points(points)
+    # show_points(points)
     pointA.draw()
     pointB.draw()
 
-def bezier_quadratic(A, B, C):
-    t = 0.05
-
+def bezier_quadratic(A, B, C, t):
     points = []
 
     xA, yA = A
@@ -79,10 +91,45 @@ def bezier_quadratic(A, B, C):
     pointC.draw()
 
 @window.event
+def bezier_cubic(A, B, C, D, t):
+    xA, yA = A
+    xB, yB = B
+    xC, yC = C
+    xD, yD = D
+
+    points = []
+
+    i = t
+    while i < 1:
+        x1 = (1-i)*((1-i)*xA + i*xC) + i*((1-i)*xC + i*xB)
+        x2 = (1-i)*((1-i)*xC + i*xD) + i*((1-i)*xD + i*xB)
+
+        y1 = (1-i)*((1-i)*yA + i*yC) + i*((1-i)*yC + i*yB)
+        y2 = (1-i)*((1-i)*yC + i*yD) + i*((1-i)*yD + i*yB)
+
+        x = ((1-t)*x1) + (t*x2)
+        y = ((1-t)*y1) + (t*y2)
+
+        points.insert(0, (x, y))
+
+    show_lines(points, A, B)
+    pointA.draw()
+    pointB.draw()
+    pointC.draw()
+    pointD.draw()
+
+t = 0.05
+
+@window.event
 def on_draw():
     window.clear()
-    # bezier_linear(pointA.position, pointB.position)
-    bezier_quadratic(pointA.position, pointB.position, pointC.position)
+    label.draw()
+    if mode == 1:
+        bezier_linear(pointA.position, pointB.position, t)
+    elif mode == 2:
+        bezier_quadratic(pointA.position, pointB.position, pointC.position, t)
+    elif mode == 3:
+        bezier_cubic(pointA.position, pointB.position, pointC.position, pointD.position, t)
 
 
 pyglet.app.run()
