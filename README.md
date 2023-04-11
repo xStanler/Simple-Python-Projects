@@ -34,3 +34,13 @@ This program takes photos in '.jpg' and saves them as ascii image in '.txt' file
 Generates qrcodes with your custom text saved in.
 
 ![qr](https://user-images.githubusercontent.com/64655758/230913013-98459fbc-6723-4d5b-933f-172ba880d921.png)
+
+---
+
+### 6. Math Graphs
+
+Draws math graphs given by user
+
+![math-graphs](https://user-images.githubusercontent.com/64655758/231170464-6a09dd28-0985-4a4d-81e7-9b5f50530793.png)
+
+
