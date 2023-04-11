@@ -129,10 +129,13 @@ def on_draw():
     window.clear()
     label.draw()
     if mode == 1:
+        window.set_caption("Bezier - Linear")
         bezier_linear(pointA.position, pointB.position, t)
     elif mode == 2:
+        window.set_caption("Bezier - Quadratic")
         bezier_quadratic(pointA.position, pointB.position, pointC.position, t)
     elif mode == 3:
+        window.set_caption("Bezier - Cubic")
         bezier_cubic(pointA.position, pointB.position, pointC.position, pointD.position, t)
 
 

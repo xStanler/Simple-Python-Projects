@@ -12,7 +12,7 @@ def generate_qr_code(text, file_name):
 
     qr.add_data(text)
     qr.make(fit=True)
-    img = qr.make_image(fill_color=(217, 191, 106), back_color=(21, 67, 148))
+    img = qr.make_image(fill_color=(89, 201, 111), back_color=(40, 40, 40))
     img.save(file_name)
 
 
@@ -26,7 +26,7 @@ for file in files:
         os.remove(os.path.join(directory, file))
 
 # text = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-text = "https://m.facebook.com/Geopolityka.Uj/"
+text = "xStanler on GitHub!"
 file_name = 'qr.png'
 
 
